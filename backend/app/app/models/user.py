@@ -1,6 +1,6 @@
 from typing import TYPE_CHECKING
 
-from sqlalchemy import Boolean, Column, Integer, String
+from sqlalchemy import Boolean, Column, Integer, String, ARRAY
 from sqlalchemy.orm import relationship
 
 from app.db.base_class import Base
@@ -16,4 +16,5 @@ class User(Base):
     hashed_password = Column(String, nullable=False)
     is_active = Column(Boolean(), default=True)
     is_superuser = Column(Boolean(), default=False)
+    roles = Column(ARRAY(String), default=[], nullable=True)
     items = relationship("Item", back_populates="owner")

@@ -2,6 +2,8 @@ from typing import Optional
 
 from pydantic import BaseModel, EmailStr
 
+from typing import List
+
 
 # Shared properties
 class UserBase(BaseModel):
@@ -9,6 +11,7 @@ class UserBase(BaseModel):
     is_active: Optional[bool] = True
     is_superuser: bool = False
     full_name: Optional[str] = None
+    roles: Optional[List[str]] = None
 
 
 # Properties to receive via API on creation
