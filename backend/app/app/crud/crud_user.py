@@ -107,6 +107,7 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
         Returns:
             bool: True if the user is a superuser, else False.
         """
+        return user.is_superuser
 
 
 user = CRUDUser(User)
