@@ -2,18 +2,20 @@
   <div>
     <v-toolbar light>
       <v-toolbar-title>
-        Manage Users
+        Administrar usuarios
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn color="primary" to="/main/admin/users/create">Create User</v-btn>
+      <v-btn color="primary" to="/main/admin/users/create">Crear usuario</v-btn>
     </v-toolbar>
     <v-data-table :headers="headers" :items="users">
       <template slot="items" slot-scope="props">
-        <td>{{ props.item.name }}</td>
+        <!-- <td>{{ props.item.name }}</td> -->
         <td>{{ props.item.email }}</td>
         <td>{{ props.item.full_name }}</td>
         <td><v-icon v-if="props.item.is_active">checkmark</v-icon></td>
         <td><v-icon v-if="props.item.is_superuser">checkmark</v-icon></td>
+        <!-- Add prop for Roles -->
+        <td>{{ props.item.roles }}</td>
         <td class="justify-center layout px-0">
           <v-tooltip top>
             <span>Edit</span>
@@ -37,12 +39,12 @@ import { dispatchGetUsers } from '@/store/admin/actions';
 @Component
 export default class AdminUsers extends Vue {
   public headers = [
-    {
-      text: 'Name',
-      sortable: true,
-      value: 'name',
-      align: 'left',
-    },
+    // {
+    //   text: 'Name',
+    //   sortable: true,
+    //   value: 'name',
+    //   align: 'left',
+    // },
     {
       text: 'Email',
       sortable: true,
@@ -50,25 +52,29 @@ export default class AdminUsers extends Vue {
       align: 'left',
     },
     {
-      text: 'Full Name',
+      text: 'Nombre completo',
       sortable: true,
       value: 'full_name',
       align: 'left',
     },
     {
-      text: 'Is Active',
+      text: 'Está activo',
       sortable: true,
       value: 'isActive',
       align: 'left',
     },
     {
-      text: 'Is Superuser',
+      text: 'Es superusuario',
       sortable: true,
       value: 'isSuperuser',
       align: 'left',
     },
     {
-      text: 'Actions',
+      text: 'Roles',
+      value: 'roles'
+    },
+    {
+      text: 'Acciones',
       value: 'id',
     },
   ];

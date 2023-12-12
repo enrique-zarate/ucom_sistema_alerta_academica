@@ -45,7 +45,7 @@
               <v-icon>group</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
-              <v-list-tile-title>Manage Users</v-list-tile-title>
+              <v-list-tile-title>Administrar usuarios</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
           <v-list-tile to="/main/admin/users/create">
