@@ -78,10 +78,12 @@ export default class AdminUsers extends Vue {
       value: 'id',
     },
   ];
+  // get user is used to get the user from the store
   get users() {
     return readAdminUsers(this.$store);
   }
 
+  // mounted is used to dispatch the action to get the users
   public async mounted() {
     await dispatchGetUsers(this.$store);
   }

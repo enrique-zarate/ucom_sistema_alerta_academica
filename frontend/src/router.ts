@@ -86,6 +86,33 @@ export default new Router({
                 },
               ],
             },
+            {
+              path: 'admin',
+              redirect: 'admin/students/all',
+              children: [
+                {
+                  path: 'students',
+                  redirect: 'students/all',
+                },
+                {
+                  path: 'students/all',
+                  component: () => import(
+                    /* webpackChunkName: "main-admin-students" */ './views/main/admin/AdminStudents.vue'),
+                },
+                // {
+                //   path: 'students/edit/:id',
+                //   name: 'main-admin-students-edit',
+                //   component: () => import(
+                //     /* webpackChunkName: "main-admin-students-edit" */ './views/main/admin/EditStudent.vue'),
+                // },
+                // {
+                //   path: 'students/create',
+                //   name: 'main-admin-students-create',
+                //   component: () => import(
+                //     /* webpackChunkName: "main-admin-students-create" */ './views/main/admin/CreateStudent.vue'),
+                // },
+              ],
+            },
           ],
         },
       ],

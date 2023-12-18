@@ -21,7 +21,7 @@ def read_users(
     current_user: models.User = Depends(deps.get_current_active_superuser),
 ) -> Any:
     """
-    Retrieve users.
+    Retrieve users...
     """
     users = crud.user.get_multi(db, skip=skip, limit=limit)
     return users
