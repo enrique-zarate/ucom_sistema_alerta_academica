@@ -2,9 +2,10 @@ from typing import Any, Dict, Optional, Union
 
 from sqlalchemy.orm import Session
 
-from app.core.security import get_password_hash, verify_password
+from app.core.security import get_password_hash
 from app.crud.base import CRUDBase
 from app.models.student import Student
+from app.models.grade import Grade
 from app.schemas.student import StudentCreate, StudentUpdate
 
 
@@ -24,9 +25,7 @@ class CRUDStudent(CRUDBase[Student, StudentCreate, StudentUpdate]):
         """
         db_obj = Student(
             email=obj_in.email,
-            hashed_password=get_password_hash(obj_in.password),
             full_name=obj_in.full_name,
-            roles=["student"],
         )
         db.add(db_obj)
         db.commit()

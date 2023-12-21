@@ -87,32 +87,18 @@ export default new Router({
               ],
             },
             {
-              path: 'admin',
-              redirect: 'admin/students/all',
-              children: [
-                {
-                  path: 'students',
-                  redirect: 'students/all',
-                },
-                {
-                  path: 'students/all',
-                  component: () => import(
-                    /* webpackChunkName: "main-admin-students" */ './views/main/admin/AdminStudents.vue'),
-                },
-                // {
-                //   path: 'students/edit/:id',
-                //   name: 'main-admin-students-edit',
-                //   component: () => import(
-                //     /* webpackChunkName: "main-admin-students-edit" */ './views/main/admin/EditStudent.vue'),
-                // },
-                // {
-                //   path: 'students/create',
-                //   name: 'main-admin-students-create',
-                //   component: () => import(
-                //     /* webpackChunkName: "main-admin-students-create" */ './views/main/admin/CreateStudent.vue'),
-                // },
-              ],
+              path: 'students/all',
+              component: () => import(/* webpackChunkName: "main-students" */ './views/main/student/Students.vue'),
             },
+            {
+              path: 'students/create',
+              component: () => import(/* webpackChunkName: "create-student" */ './views/main/student/CreateStudent.vue'),
+            },
+            {
+              path: 'students/add-grade/:id',
+              name: 'main-students-add-grade',
+              component: () => import(/* webpackChunkName: "add-grade" */ './views/main/student/AddGrade.vue'),
+            }
           ],
         },
       ],

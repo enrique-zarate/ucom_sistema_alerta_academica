@@ -18,10 +18,7 @@ def read_students(
     """
     Retrieve students.
     """
-    # if crud.student.is_superuser(current_user):
     students = crud.student.get_multi(db, skip=skip, limit=limit)
-    # else:
-    #     students = [current_user]
     return students
 
 # Get a student by id
@@ -38,8 +35,6 @@ def read_student_by_id(
     student = crud.student.get_by_id(db, id=id)
     if not student:
         raise HTTPException(status_code=404, detail="Student not found")
-    if not crud.student.is_superuser(current_user) and (student.id != current_user.id):
-        raise HTTPException(status_code=400, detail="Not enough permissions")
     return student
 
 # Create a new student
@@ -53,14 +48,12 @@ def create_student(
     """
     Create new student.
     """
-    if not crud.student.is_superuser(current_user):
-        raise HTTPException(status_code=400, detail="Not enough permissions")
-    student = crud.student.get_by_id(db, id=student_in.id)
-    if student:
-        raise HTTPException(
-            status_code=400,
-            detail="The user with this username already exists in the system.",
-        )
+    # student = crud.student.get_by_id(db, id=student_in.id)
+    # if student:
+    #     raise HTTPException(
+    #         status_code=400,
+    #         detail="The user with this username already exists in the system.",
+    #     )
     student = crud.student.create(db, obj_in=student_in)
     return student
 

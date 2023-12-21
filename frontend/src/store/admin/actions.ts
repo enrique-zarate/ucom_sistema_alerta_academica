@@ -16,7 +16,9 @@ export const actions = {
         try {
             const response = await api.getUsers(context.rootState.main.token);
             if (response) {
+                console.log('Before mutation, users:', context.state.users);
                 commitSetUsers(context, response.data);
+                console.log('After mutation, users:', context.state.users);
             }
         } catch (error) {
             await dispatchCheckApiError(context, error);
@@ -56,11 +58,17 @@ export const actions = {
     // Students.
     async actionGetStudents(context: MainContext) {
         try {
-            const response = await api.getStudents(context.rootState.main.token);
+            const response = await api.getStudents();
             if (response) {
+                console.log('Before mutation, students:', context.state.students);
                 commitSetStudents(context, response.data);
+                console.log('After mutation, students:', context.state.students);
+            }
+            else {
+                console.log('No fetched students');
             }
         } catch (error) {
+            console.log('Error fetching students:', error);
             await dispatchCheckApiError(context, error);
         }
     },
@@ -97,6 +105,22 @@ export const actions = {
         }
     },
 
+    async actionAddGrade(context: MainContext, payload: { studentId: number, grade: number }) {
+        try {
+            const loadingNotification = { content: 'saving', showProgress: true };
+            commitAddNotification(context, loadingNotification);
+            const response = (await Promise.all([
+                api.addGrade( payload.studentId, payload.grade),
+                await new Promise<void>((resolve, reject) => setTimeout(() => resolve(), 500)),
+            ]))[0];
+            commitSetStudent(context, response.data);
+            commitRemoveNotification(context, loadingNotification);
+            commitAddNotification(context, { content: 'Grade successfully added', color: 'success' });
+        } catch (error) {
+            await dispatchCheckApiError(context, error);
+        }
+    },
+
 };
 
 
@@ -110,3 +134,5 @@ export const dispatchUpdateUser = dispatch(actions.actionUpdateUser);
 export const dispatchGetStudents = dispatch(actions.actionGetStudents);
 export const dispatchUpdateStudent = dispatch(actions.actionUpdateStudent);
 export const dispatchCreateStudent = dispatch(actions.actionCreateStudent);
+// Grades.
+export const dispatchAddGrade = dispatch(actions.actionAddGrade);

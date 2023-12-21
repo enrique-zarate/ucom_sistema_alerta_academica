@@ -57,8 +57,8 @@
               <v-list-tile-title>Create User</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
-          <!-- Manage students tile -->
-          <v-list-tile to="/main/admin/students/all">
+          <!-- Students tile -->
+          <v-list-tile to="/main/students/all">
             <v-list-tile-action>
               <v-icon>group</v-icon>
             </v-list-tile-action>

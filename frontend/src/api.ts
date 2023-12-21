@@ -37,8 +37,8 @@ export const api = {
 
   // Students.
   // getStudents: gets all students from /api/v1/students/
-  async getStudents(token: string) {
-    return axios.get<IStudent[]>(`${apiUrl}/api/v1/students/`, authHeaders(token));
+  async getStudents() {
+    return axios.get<IStudent[]>(`${apiUrl}/api/v1/students/`);
   },
   // updateStudent: updates a student from /api/v1/students/:studentId
   async updateStudent(token: string, studentId: number, data: IStudentUpdate) {
@@ -47,6 +47,16 @@ export const api = {
   // createStudent: creates a student from /api/v1/students/
   async createStudent(token: string, data: IStudentCreate) {
     return axios.post(`${apiUrl}/api/v1/students/`, data, authHeaders(token));
+  },
+
+  // Grades.
+  // getGrades: gets all grades from /api/v1/grades/
+  // async getGrades() {
+  //   return axios.get(`${apiUrl}/api/v1/grades/`);
+  // },
+  // add a grade for a student
+  async addGrade(StudentId: number, data: any) {
+    return axios.post(`${apiUrl}/api/v1/students/${StudentId}/add-grade`, data);
   },
 
 
